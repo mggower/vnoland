@@ -316,7 +316,9 @@ body {
 }
 
 .teamLowgos {
-  position: sticky;
+  display: block;
+  position: fixed;
+  z-index: -3;
   width: 100%;
   display: flex;
   flex-direction: row;

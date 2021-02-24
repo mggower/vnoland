@@ -1,6 +1,7 @@
 {
   "root": "App",
   "entry": "./src",
+  "vue": 3,
   "options": {
     "port": 3000
   }

@@ -1,7 +1,6 @@
 import { Application, join, send } from "./deps.ts";
 
-// const port: any = Deno.env.get("PORT") || 3000;
-const port = 8080;
+const port: any = Deno.env.get("PORT") || 3000;
 const hostname = "0.0.0.0";
 
 const server: Application = new Application();

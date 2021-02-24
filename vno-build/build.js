@@ -1,9 +1,9 @@
 /* eslint-disable */
 /* eslint-disable prettier/prettier */
 // deno-lint-ignore-file
-import Vue from "https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.esm.browser.js";
+import * as Vue from "https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.esm-browser.js";
 
-const DocItem = Vue.component("doc-item", {
+const DocItem = {
   template: /* html */ `
   <div :id="element">
     <li class="docItemContainer">
@@ -15,19 +15,19 @@ const DocItem = Vue.component("doc-item", {
     </li>
   </div>
 `,
-  name: "doc-item",
-  props: ["element", "bullet", "code", "gif"],
-});
+  name: 'doc-item',
+  props: ['element', 'bullet', 'code', 'gif'],
+};
 
-const DocNav = Vue.component("doc-item", {
+const DocNav = {
   template: /* html */ `
   <a :href="link" class="docnav-element">{{ element }}</a>
 `,
-  name: "doc-item",
-  props: ["element", "methods", "link"],
-});
+  name: 'doc-nav',
+  props: ['element', 'methods', 'link'],
+};
 
-const Home = Vue.component("Home", {
+const Home = {
   template: /* html */ `
   <div class="home">
     <a href="https://github.com/oslabs-beta/vno">
@@ -45,11 +45,14 @@ const Home = Vue.component("Home", {
     </div>
   </div>
 `,
-  name: "Home",
-  props: { msg: String },
-});
+  name: 'Home',
 
-const Team = Vue.component("Team", {
+  props: {
+    msg: String,
+  },
+};
+
+const Team = {
   template: /* html */ `
   <div class="flip-box">
     <div class="flip-box-inner">
@@ -76,11 +79,11 @@ const Team = Vue.component("Team", {
     </div>
   </div>
 `,
-  props: ["name", "email", "github", "linkedIn", "about", "picture"],
-  name: "Team",
-});
+  props: ['name', 'email', 'github', 'linkedIn', 'about', 'picture'],
+  name: 'Team',
+};
 
-const Docs = Vue.component("docs", {
+const Docs = {
   template: /* html */ `
   <div id="docs">
     <nav id="doc-nav">
@@ -108,11 +111,11 @@ const Docs = Vue.component("docs", {
     </div>
   </div>
 `,
-  name: "docs",
+  name: 'docs',
   components: { DocItem, DocNav },
   data() {
     return {
-      top: "",
+      top: '',
       methods: {
         scrollMeTo(refName) {
           var element = this.$refs[refName];
@@ -123,60 +126,60 @@ const Docs = Vue.component("docs", {
       },
       information: [
         {
-          element: "install",
-          bullet:
-            `In order to run vno locally from your machine, you'll need to name and install the executable.`,
+          element: 'install',
+          bullet: `In order to run vno locally from your machine, you'll need to name and install the executable.`,
           code:
-            "deno install --allow-read --allow-write --allow-run --allow-net --unstable -f -n vno https://deno.land/x/vno/dist/mod.ts",
-          gif: "https://media.giphy.com/media/LVokebNuReGJuwU13R/giphy.gif",
+            'deno install --allow-net --unstable -f  https://deno.land/x/vno/install/vno.ts',
+          gif: 'https://media.giphy.com/media/LVokebNuReGJuwU13R/giphy.gif',
         },
         {
-          element: "create",
-          bullet:
-            `You can now utilize vno create in your terminal to instantiate a new Vue/Deno project using vno.`,
-          code: "vno create [new project]",
-          gif: "https://i.ibb.co/Fw5Sp7n/vno-create.gif",
+          element: 'create',
+          bullet: `You can now utilize vno create in your terminal to instantiate a new Vue/Deno project using vno.`,
+          code: 'vno create [new project]',
+          gif: 'https://i.ibb.co/Fw5Sp7n/vno-create.gif',
         },
         {
-          element: "build",
-          bullet:
-            `After successfully intalling and running create, you can use the vno build to initialize the parsing of your components. *this method can be utilized without using the create method described above so long as you provide a vno.config.json file containing {root: 'Name', path: 'relative path'}.`,
-          code: "vno build",
+          element: 'build',
+          bullet: `After successfully intalling and running create (cd into the project folder), you can use the vno build to initialize the parsing of your components. *this method can be utilized without using the create method described above so long as you provide a vno.config.json file containing {root: 'Name', entry: 'relative path to root'}.`,
+          code: 'vno build',
           gif:
-            "https://cdn-images-1.medium.com/max/1600/1*-uhAIJMly9eTevEhgrulqw.gif",
+            'https://cdn-images-1.medium.com/max/1600/1*-uhAIJMly9eTevEhgrulqw.gif',
         },
         {
-          element: "run dev",
-          bullet:
-            `To faciliate development, we have provided access to a dummy server/re-build process that will bypass the need for manual rebuild every time a change has occured during development. You will simply need to call vno run dev to spin up the server with a connection to your root component. If you would like to utilize this functionality but have bypassed the create method, you will need to add an "options": {"port": 3000} to your vno.config.json file.`,
-          code: "vno run dev",
+          element: 'run dev',
+          bullet: `To faciliate development, we have provided access to a dummy server/re-build process that will bypass the need for manual rebuild every time a change has occured during development. You will simply need to call vno run dev to spin up the server with a connection to your root component. If you would like to utilize this functionality but have bypassed the create method, you will need to add an "options": {"port": 3000} to your vno.config.json file.`,
+          code: 'vno run dev',
           gif:
-            "https://cdn-images-1.medium.com/max/1600/1*5vQGLXvmlzJacQpqFEJV-Q.gif",
+            'https://cdn-images-1.medium.com/max/1600/1*5vQGLXvmlzJacQpqFEJV-Q.gif',
         },
         {
-          element: "external dependencies",
-          bullet:
-            `If you would prefer to not install vno locally to your machine, you can import the module from deno.land into your project.`,
-          code: `import vno from http://deno.land/x/vno/dist/mod.ts`,
+          element: 'external dependencies',
+          bullet: `If you would prefer to not install vno locally to your machine, you can import the module from deno.land into your project.`,
+          code: `import Factory from http://deno.land/x/vno/dist/mod.ts`,
         },
         {
-          element: "config",
-          bullet: `Simply call the config method inside your server.`,
-          code: `vno.config({root:'App', entry:'./path'})`,
+          element: 'Factory',
+          bullet: `instantiate the Factory class`,
+          code: `const vno = new Factory()`,
+        },
+        {
+          element: 'Build',
+          bullet: `run the build method on the Factory class`,
+          code: `await vno.build()`,
         },
       ],
     };
   },
-});
+};
 
-const App = new Vue({
+const App = {
   template: /* html */ `
   <div id="app">
     <header>
       <ul class="nav">
         <a @click="handelClick('Home')"><li>Home</li></a>
-        <a @click="handelClick('Team')"><li>Team</li></a>
         <a @click="handelClick('Docs')"><li>Docs</li></a>
+        <a @click="handelClick('Team')"><li>Team</li></a>
       </ul>
     </header>
 
@@ -217,43 +220,43 @@ const App = new Vue({
     </div>
   </div>
 `,
-  name: "app",
+  name: 'app',
   data() {
     return {
-      displayedComponent: "Home",
+      displayedComponent: 'Home',
       team: [
         {
-          name: "Mikey Gower",
-          email: "mailto:gowermikey@gmail.com",
-          picture: "/assets/Mikey.jpg",
-          about: "Mikey loves wine. He also loves to party with said wine.",
-          github: "https://github.com/mggower",
-          linkedIn: "https://www.linkedin.com/in/mikeygower/",
+          name: 'Mikey Gower',
+          email: 'mailto:gowermikey@gmail.com',
+          picture: '/assets/Mikey.jpg',
+          about: 'Mikey loves wine. He also loves to party with said wine.',
+          github: 'https://github.com/mggower',
+          linkedIn: 'https://www.linkedin.com/in/mikeygower/',
         },
         {
-          name: "Jordan Grubb",
-          email: "mailto:ImJordanGrubb@gmail.com",
-          picture: "/assets/Jordan.jpg",
-          about: "Her drag name is Miss Diagnosed. She loves whiskey.",
-          github: "https://github.com/jgrubb16",
-          linkedIn: "https://www.linkedin.com/in/j-grubb",
+          name: 'Jordan Grubb',
+          email: 'mailto:ImJordanGrubb@gmail.com',
+          picture: '/assets/Jordan.jpg',
+          about: 'Her drag name is Miss Diagnosed. She loves whiskey.',
+          github: 'https://github.com/jgrubb16',
+          linkedIn: 'https://www.linkedin.com/in/j-grubb',
         },
         {
-          name: "Kyle Jurassic",
-          email: "mailto:kjuresich@gmail.com",
-          picture: "/assets/Kyle.jpg",
-          about: "He made our ReadMe, and he can read you for filth.",
-          github: "http://github.com/kjurassic",
-          linkedIn: "http://linkedin.com/in/kyle-juresich/",
+          name: 'Kyle Jurassic',
+          email: 'mailto:kjuresich@gmail.com',
+          picture: '/assets/Kyle.jpg',
+          about: 'He made our ReadMe, and he can read you for filth.',
+          github: 'http://github.com/kjurassic',
+          linkedIn: 'http://linkedin.com/in/kyle-juresich/',
         },
         {
-          name: "Andrew Rehrig",
-          email: "mailto:arehrig@gmail.com",
-          picture: "/assets/Andrew.jpg",
+          name: 'Andrew Rehrig',
+          email: 'mailto:arehrig@gmail.com',
+          picture: '/assets/Andrew.jpg',
           about:
             "She's beauty. She's grace. She loves a coding test. She can win any sewing challenge.",
-          github: "https://github.com/andrew-rehrig",
-          linkedIn: "https://www.linkedin.com/in/andrew-rehrig/",
+          github: 'https://github.com/andrew-rehrig',
+          linkedIn: 'https://www.linkedin.com/in/andrew-rehrig/',
         },
       ],
     };
@@ -269,6 +272,13 @@ const App = new Vue({
     Team,
     Docs,
   },
-});
+};
 
-App.$mount("#app");
+const vno505690 = Vue.createApp(App)
+vno505690.component("docs", Docs)
+vno505690.component("doc-nav", DocNav)
+vno505690.component("doc-item", DocItem)
+vno505690.component("Team", Team)
+vno505690.component("Home", Home)
+
+vno505690.mount("#app")

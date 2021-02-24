@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'doc-item',
+  name: 'doc-nav',
   props: ['element', 'methods', 'link'],
 };
 </script>
